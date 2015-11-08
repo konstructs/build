@@ -1,0 +1,12 @@
+FROM ubuntu:15.04
+MAINTAINER Stefan Berggren <nsg@nsg.cc>
+
+# Make sure we are up-to-date
+RUN apt-get -y update && apt-get -y upgrade
+
+# Install packages
+RUN apt-get -y install doxygen graphviz
+
+# Setup build dir
+RUN mkdir /build
+WORKDIR /build
