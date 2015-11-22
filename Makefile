@@ -1,7 +1,7 @@
 BASE_NAME = nsgb/konstructs-build-image
 VERSION_LINUX = 2
 VERSION_WINDOWS = 4
-VERSION_DOCS = 2
+VERSION_DOCS = 3
 
 all: build tag push
 	:
