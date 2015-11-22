@@ -1,15 +1,15 @@
-FROM ubuntu:trusty
+FROM fedora:23
 MAINTAINER Stefan Berggren <nsg@nsg.cc>
 
-# Make sure we are up-to-date
-RUN apt-get -y update && apt-get -y upgrade
-
-# Install packages needed to build the binary
-RUN apt-get -y install git wget zip unzip \
-	build-essential cmake libglew-dev \
-	xorg-dev python-pip binutils-mingw-w64-i686 \
-	gcc-mingw-w64-i686 g++-mingw-w64-i686  \
-	&& apt-get -y build-dep glfw
+RUN yum -y groupinstall "Development Tools"
+RUN yum -y update && yum -y upgrade
+RUN yum -y install git wget zip unzip cmake \
+	glew-devel mingw64-binutils mingw64-gcc \
+	mingw64-gcc-c++ mingw32-binutils \
+	mingw32-gcc mingw32-gcc-c++ \
+	libXinerama-devel libXcursor-devel \
+	zlib-devel xorg-x11-server-devel \
+	mesa-libGL-devel libXrandr-devel
 
 # Setup build dir
 RUN mkdir /build
