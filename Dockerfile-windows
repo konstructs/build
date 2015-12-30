@@ -9,7 +9,9 @@ RUN yum -y install git wget zip unzip cmake \
 	mingw32-gcc mingw32-gcc-c++ \
 	libXinerama-devel libXcursor-devel \
 	zlib-devel xorg-x11-server-devel \
-	mesa-libGL-devel libXrandr-devel
+	mesa-libGL-devel libXrandr-devel \
+	mingw32-winpthreads-static \
+	mingw32-winpthreads
 
 # Setup build dir
 RUN mkdir /build
