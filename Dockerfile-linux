@@ -5,15 +5,24 @@ MAINTAINER Stefan Berggren <nsg@nsg.cc>
 RUN apt-get -y update && apt-get -y upgrade
 
 # Install packages needed to build the binary
-RUN apt-get -y install git wget zip unzip \
-	build-essential cmake libglew-dev \
-	xorg-dev python-pip binutils-mingw-w64-i686 \
-	gcc-mingw-w64-i686 g++-mingw-w64-i686 \
+RUN apt-get -y install build-essential git wget \
+	zip unzip gcc-4.8 g++-4.8 cmake libglew-dev \
+	xorg-dev python-pip \
 	&& apt-get -y build-dep glfw
 
 # Install packages to package the binary
-RUN apt-get -y install ruby-dev rubygems rpm \
+RUN apt-get -y install \
+	ruby-dev libffi-dev \
+	rubygems rpm \
 	&& gem install fpm -v 1.3.3 --no-ri --no-rdoc
+
+# Set gcc version to 4.8
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 100 \
+	&& update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 100 \
+	&& update-alternatives --install /usr/bin/cpp cpp-bin /usr/bin/cpp-4.8 100 \
+	&& update-alternatives --set g++ /usr/bin/g++-4.8 \
+	&& update-alternatives --set gcc /usr/bin/gcc-4.8 \
+	&&update-alternatives --set cpp-bin /usr/bin/cpp-4.8
 
 # Setup build dir
 RUN mkdir /build

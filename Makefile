@@ -1,5 +1,5 @@
 BASE_NAME = nsgb/konstructs-build-image
-VERSION_LINUX = 2
+VERSION_LINUX = 3
 VERSION_WINDOWS = 5
 VERSION_DOCS = 3
 
