@@ -13,6 +13,18 @@ RUN yum -y install git wget zip unzip cmake \
 	mingw32-winpthreads-static \
 	mingw32-winpthreads
 
+# Setup zlib
+RUN mkdir -p /tmp/build-deps/zlib \
+	&& wget http://netcologne.dl.sourceforge.net/project/gnuwin32/zlib/1.2.3/zlib-1.2.3-lib.zip \
+		-O /tmp/build-deps/zlib-1.2.3-lib.zip \
+	&& echo "b0a2df1a2b0dd0bd801d71d06ce42360  /tmp/build-deps/zlib-1.2.3-lib.zip" | md5sum -c - \
+	&& cd /tmp/build-deps/zlib && unzip ../zlib*lib.zip
+RUN mkdir -p /tmp/build-deps/zlib-bin \
+	&& wget http://netcologne.dl.sourceforge.net/project/gnuwin32/zlib/1.2.3/zlib-1.2.3-bin.zip \
+		-O /tmp/build-deps/zlib-1.2.3-bin.zip \
+	&& echo "0b431b557399c1b3948c13c803a22c95  /tmp/build-deps/zlib-1.2.3-bin.zip" | md5sum -c - \
+	&& cd /tmp/build-deps/zlib-bin && unzip ../zlib*bin.zip
+
 # Setup build dir
 RUN mkdir /build
 WORKDIR /build
